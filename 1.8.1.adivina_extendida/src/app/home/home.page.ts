@@ -9,22 +9,24 @@ export class HomePage {
 
   num: number = 0; // Esta variable la vamos a inicializar con el input del html mediante [(ngModel)]="num"
   numSecret: number = Math.round(Math.random()*100+1);
-  respuesta: string = "¿La suerte te acompaña?"; // esta variable la vamos a mostrar en el html
+  pista: string = "¿La suerte te acompaña?"; // esta variable la vamos a mostrar en el html
 
   constructor() {}
 // Función que compara el número introducido por el usuario con numSecret
   comprobarNumero(){
+    console.log(this.numSecret);
     // comprobamos el el número tiene valor diferente a 0
     if(this.num != 0){
       // Comparamos el valor de los números
       if(this.numSecret < this.num){
-        this.respuesta = "El número que buscas es menor al intoducido"
+        this.pista = "MENOR"
       }else if(this.numSecret > this.num){
-        this.respuesta = "El número que buscas es mayor al intoducido"
+        this.pista = "MAYOR"
       }else{
-        this.respuesta = "¡¡ENHORABUENA!! Acertaste el número!!"
+        this.pista = "¡Bravooo!! oh yeeeaaahhhh"
       }
     }
+
 
   }
 

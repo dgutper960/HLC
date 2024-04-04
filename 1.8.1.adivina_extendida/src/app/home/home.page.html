@@ -14,13 +14,27 @@
     <ion-input type="number" min="1" max="100" [(ngModel)]="num" placeholder="Introduce un número del 1 al 100"> 
     </ion-input>
 
+    <!-- Mostramos una pista al usuario -->
+    <h4>{{pista}}</h4>
+
     <!-- boton ionic de tipo block para comprobar si el valor es correcto -->
     <!-- Añadimos el listener de click para comparar el número -->
     <ion-button expand="block" (click)="comprobarNumero()">Adivina</ion-button>
 
-    <!-- Vamos a mostrar la variable que hemos definido como string -->
-    <h3> {{respuesta}} </h3> 
-    <!-- Podríamos intercalar el valor con el propio contenido intrínsico del h3 -->
   </div>
+
+    <!-- Implementamos la etiqueta con ngIf -->
+    <!-- Esta etiqueta solo se muestra si la variable pista es igual al texto indicado -->
+    <ion-card *ngIf="pista==='¡Bravooo!! oh yeeeaaahhhh'">
+      <ion-card-header>
+        CONGRATULATIONS!!!
+      </ion-card-header>
+      <ion-card-content>
+        The secret number is {{num}}
+      </ion-card-content>
+
+    </ion-card>
+
+
 
 </ion-content>
