@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Adivina el número secreto
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<!-- Clase ionic ion.padding -> establece un margen interno al elemento -->
+  <div class="ion.padding">
+    <!-- capo de texto de ionic -->
+    <!-- [(ngModel)]="num" relaciona el valor del input con la variable indicada -->
+    <ion-input type="number" min="1" max="100" [(ngModel)]="num" placeholder="Introduce un número del 1 al 100"> 
+    </ion-input>
+
+    <!-- boton ionic de tipo block para comprobar si el valor es correcto -->
+    <!-- Añadimos el listener de click para comparar el número -->
+    <ion-button expand="block" (click)="comprobarNumero()">Adivina</ion-button>
+
+    <!-- Vamos a mostrar la variable que hemos definido como string -->
+    <h3> {{respuesta}} </h3> 
+    <!-- Podríamos intercalar el valor con el propio contenido intrínsico del h3 -->
+  </div>
+
+</ion-content>
