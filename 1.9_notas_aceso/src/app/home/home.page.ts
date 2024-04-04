@@ -11,6 +11,7 @@ export class HomePage {
   lengua: number = 0; // si no están inicializadas nos da error
   comentario: number = 0;
   ingles: number = 0;
+
   especifica1: number = 0;
   especifica2: number = 0;
 
@@ -24,6 +25,20 @@ export class HomePage {
   // definimos el método que calcula la nota final
   calcNotaFinal(general: number, especifica: number){
     return (general+especifica)/2;
+  }
+
+  calcularMedias(){
+
+    // Calculamos las medias específicas y general
+    this.medGeneral = (this.lengua + this.comentario + this.ingles) / 3;
+    this.medEspecifica = (this.especifica1 + this.especifica2) / 2;
+
+    // si ambas estan dentro del rango indicado llamamos calculamos la nota final
+    if(this.medEspecifica >= 4 && this.medGeneral >= 4){
+      this.notaFinal = this.calcNotaFinal(this.medGeneral, this.medEspecifica);
+    }
+
+    console.log(this.notaFinal);
   }
 
 }

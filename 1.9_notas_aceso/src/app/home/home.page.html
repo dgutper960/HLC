@@ -16,13 +16,13 @@
     <h3>Notas Bloque General</h3>
     <!-- Input Nota lengua -->
     <h5>Nota Lengua Española</h5>
-    <ion-input type="number" placeholder="Introduce tu calificación aquí"></ion-input>
+    <ion-input type="number" [(ngModel)]="lengua" placeholder="Introduce tu calificación aquí" required></ion-input>
     <!-- Input Nota Comentario -->
     <h5>Nota Comentario de Texto</h5>
-    <ion-input type="number" placeholder="Introduce tu calificación aquí"></ion-input>
+    <ion-input type="number" [(ngModel)]="comentario" placeholder="Introduce tu calificación aquí" required></ion-input>
     <!-- Input Nota Inglés -->
     <h5>Nota Lengua Inglesa</h5>
-    <ion-input type="number" placeholder="Introduce tu calificación aquí"></ion-input>
+    <ion-input type="number" [(ngModel)]="ingles" placeholder="Introduce tu calificación aquí" required></ion-input>
 
   </div>
   <br>
@@ -30,13 +30,25 @@
     <h3>Notas Bloque Específico</h3>
       <!-- Input Nota Específica 1 -->
       <h5>Nota Materia Específica 1</h5>
-      <ion-input type="number" placeholder="Introduce tu calificación aquí"></ion-input>
+      <ion-input type="number" [(ngModel)]="especifica1" placeholder="Introduce tu calificación aquí" required></ion-input>
       <!-- Input Nota Específica 2 -->
       <h5>Nota Materia Específica 2</h5>
-      <ion-input type="number" placeholder="Introduce tu calificación aquí"></ion-input>
+      <ion-input type="number" [(ngModel)]="especifica2" placeholder="Introduce tu calificación aquí" required></ion-input>
   </div>
 
   <!-- Añadimos botón para calcular las notas -->
-  <ion-button click="calcularMedias()">Calcular Nota Final</ion-button>
+  <ion-button (click)="calcularMedias()">Calcular Nota Final</ion-button>
+
+  <!-- Añadimos un elemento con la directiva *ngIf -->
+  <!-- Establecemos que sea visible cuando la nota final sea >= 5 -->
+  <h2 *ngIf="notaFinal>=5">
+    ¡¡ENHORABUENA!! 
+  </h2>
+
+  <!-- Este elemento se muestra cuando la nota final es diferente a 0 -->
+  <h2 *ngIf="notaFinal!==0">
+    Tu nota final es {{notaFinal}}
+  </h2>
+
 
 </ion-content>
