@@ -1,17 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Adivina el número secreto
-    </ion-title>
+    <ion-title> Adivina el número secreto </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<!-- Clase ionic ion.padding -> establece un margen interno al elemento -->
+  <!-- Clase ionic ion.padding -> establece un margen interno al elemento -->
   <div class="ion.padding">
     <!-- capo de texto de ionic -->
     <!-- [(ngModel)]="num" relaciona el valor del input con la variable indicada -->
-    <ion-input type="number" min="1" max="100" [(ngModel)]="num" placeholder="Introduce un número del 1 al 100"> 
+    <ion-input
+      type="number"
+      min="1"
+      max="100"
+      [(ngModel)]="num"
+      placeholder="Introduce un número del 1 al 100"
+    >
     </ion-input>
 
     <!-- Mostramos una pista al usuario -->
@@ -19,22 +23,19 @@
 
     <!-- boton ionic de tipo block para comprobar si el valor es correcto -->
     <!-- Añadimos el listener de click para comparar el número -->
-    <ion-button expand="block" (click)="comprobarNumero()">Adivina</ion-button>
-
+    <!-- Este boton solo aparece mientras el número no sea igual -->
+    <ion-button *ngIf="pista!=='¡Bravooo!! oh yeeeaaahhhh'" expand="block" (click)="comprobarNumero()">Adivina</ion-button>
   </div>
 
-    <!-- Implementamos la etiqueta con ngIf -->
-    <!-- Esta etiqueta solo se muestra si la variable pista es igual al texto indicado -->
-    <ion-card *ngIf="pista==='¡Bravooo!! oh yeeeaaahhhh'">
-      <ion-card-header>
-        CONGRATULATIONS!!!
-      </ion-card-header>
-      <ion-card-content>
-        The secret number is {{num}}
-      </ion-card-content>
+  <!-- Implementamos la etiqueta con ngIf -->
+  <!-- Esta etiqueta solo se muestra si la variable pista es igual al texto indicado -->
+  <ion-card *ngIf="pista==='¡Bravooo!! oh yeeeaaahhhh'">
+    <ion-card-header> CONGRATULATIONS!!! </ion-card-header>
+    <ion-card-content> The secret number is {{num}} </ion-card-content>
+  </ion-card>
 
-    </ion-card>
-
-
+  <!-- boton ionic de tipo block para recargar cuando el usuario lo pulse -->
+  <!-- Solo aparece en caso de que la partid termine -->
+  <ion-button *ngIf="pista==='¡Bravooo!! oh yeeeaaahhhh'" expand="block" (click)="reinicio()">Nueva Partida</ion-button>
 
 </ion-content>
