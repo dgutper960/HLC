@@ -1,0 +1,7 @@
+{
+  "name": "1.9_notas_aceso",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
