@@ -1,54 +1,106 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Cálculo de notas finales Acceso + 25 UNED
-    </ion-title>
+    <ion-title> Cálculo de notas finales Acceso + 25 UNED </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <h1>Bienvenido/a y mucha suerte</h1>
 
   <h2>Introduce tus notas en los respectivos campos</h2>
-  <br>
+  <br />
   <div class="ion.padding">
     <h3>Notas Bloque General</h3>
     <!-- Input Nota lengua -->
     <h5>Nota Lengua Española</h5>
-    <ion-input type="number" [(ngModel)]="lengua" placeholder="Introduce tu calificación aquí" required></ion-input>
+    <ion-input
+      type="number"
+      min="0"
+      max="10"
+      [(ngModel)]="lengua"
+      placeholder="Introduce tu calificación aquí"
+      required
+    ></ion-input>
     <!-- Input Nota Comentario -->
     <h5>Nota Comentario de Texto</h5>
-    <ion-input type="number" [(ngModel)]="comentario" placeholder="Introduce tu calificación aquí" required></ion-input>
+    <ion-input
+      type="number"
+      min="0"
+      max="10"
+      [(ngModel)]="comentario"
+      placeholder="Introduce tu calificación aquí"
+      required
+    ></ion-input>
     <!-- Input Nota Inglés -->
     <h5>Nota Lengua Inglesa</h5>
-    <ion-input type="number" [(ngModel)]="ingles" placeholder="Introduce tu calificación aquí" required></ion-input>
-
+    <ion-input
+      type="number"
+      min="0"
+      max="10"
+      [(ngModel)]="ingles"
+      placeholder="Introduce tu calificación aquí"
+      required
+    ></ion-input>
   </div>
-  <br>
+  <br />
   <div class="ion.padding">
     <h3>Notas Bloque Específico</h3>
-      <!-- Input Nota Específica 1 -->
-      <h5>Nota Materia Específica 1</h5>
-      <ion-input type="number" [(ngModel)]="especifica1" placeholder="Introduce tu calificación aquí" required></ion-input>
-      <!-- Input Nota Específica 2 -->
-      <h5>Nota Materia Específica 2</h5>
-      <ion-input type="number" [(ngModel)]="especifica2" placeholder="Introduce tu calificación aquí" required></ion-input>
+    <!-- Input Nota Específica 1 -->
+    <h5>Nota Materia Específica 1</h5>
+    <ion-input
+      type="number"
+      min="0"
+      max="10"
+      [(ngModel)]="especifica1"
+      placeholder="Introduce tu calificación aquí"
+      required
+    ></ion-input>
+    <!-- Input Nota Específica 2 -->
+    <h5>Nota Materia Específica 2</h5>
+    <ion-input
+      type="number"
+      min="0"
+      max="10"
+      [(ngModel)]="especifica2"
+      placeholder="Introduce tu calificación aquí"
+      required
+    ></ion-input>
   </div>
 
   <!-- Añadimos botón para calcular las notas -->
-  <ion-button (click)="calcularMedias()">Calcular Nota Final</ion-button>
+  <ion-button *ngIf="notaFinal===0&&mensaje===''" (click)="calcularMedias()">Calcular Nota Final</ion-button>
+  <ion-button *ngIf="notaFinal!==0||mensaje!==''" (click)="ngOnInit()">Reiniciar</ion-button>
 
   <!-- Añadimos un elemento con la directiva *ngIf -->
   <!-- Establecemos que sea visible cuando la nota final sea >= 5 -->
-  <h2 *ngIf="notaFinal>=5">
-    ¡¡ENHORABUENA!! 
-  </h2>
+  <h2 *ngIf="notaFinal>=5">¡¡ENHORABUENA!!</h2>
+  <h2 *ngIf="notaFinal>=5">Media en bloque general: {{medGeneral}}</h2>
+  <h2 *ngIf="notaFinal>=5">Media en bloque específico: {{medEspecifica}}</h2>
+  <h2 *ngIf="notaFinal>=5&&notaFinal<=6">SUFICIENTE</h2>
+  <h2 *ngIf="notaFinal>=6&&notaFinal<=7">BIEN</h2>
+  <h2 *ngIf="notaFinal>=7&&notaFinal<=8.5">NOTABLE</h2>
+  <h2 *ngIf="notaFinal>=8.5&&notaFinal<=10">SOBRESALIENTE</h2>
 
   <!-- Este elemento se muestra cuando la nota final es diferente a 0 -->
-  <h2 *ngIf="notaFinal!==0">
-    Tu nota final es {{notaFinal}}
+  <h2 *ngIf="notaFinal!==0">Tu nota final es {{notaFinal}}</h2>
+
+  <!-- Elemento visible si la notra final no es apta -->
+  <h2 *ngIf="notaFinal>=0.1&&notaFinal<5">
+    NO APTO. Tu calificación final está por debajo de 5
   </h2>
 
 
+  <!-- Elementos visibles en el caso de que uno de los bloques no sea apto -->
+  <h2 *ngIf="mensaje!==''">
+    {{mensaje}}
+  </h2>
+  <h2 *ngIf="mensaje!==''">
+    Media en bloque general: {{medGeneral}}
+  </h2>
+  <h2 *ngIf="mensaje!==''">
+    Media en bloque específico: {{medEspecifica}}
+  </h2>
+  <h2 *ngIf="notaFinal>=0.1&&notaFinal<5||mensaje!==''">
+    ¡Mucho ánimo en el siguiente inteno!
+  </h2>
 </ion-content>
