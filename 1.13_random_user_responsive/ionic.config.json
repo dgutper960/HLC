@@ -1,0 +1,7 @@
+{
+  "name": "1.13_random_user_responsive",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
