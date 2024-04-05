@@ -1,20 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Listado de personas </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- El elemento ion-grid nos crea una rejilla -->
+  <ion-grid>
+    <!-- deben especificarse las filas y las columnas -->
+    <ion-row>
+      <!-- Para cada columna vamos a recorer los usuarios con un for -->
+      <!-- con size elegimos el tamaño de la pantalla y el número de columnas para cada una -->
+      <ion-col *ngFor="let user of users$ | async" size-xl="2" size-lg="2" size-md="4" size-sm="6" size-xs="12">
+        <!-- Creamos una targeta para cada usuario -->
+        <ion-card>
+          <ion-card-content>
+            <ion-avatar>
+              <!-- Obtenemos la imagen de tamaño mediano -->
+              <img [src]="user.picture.medium" />
+            </ion-avatar>
+            <!-- obtenemos el nombre y el apellido -->
+            <h1>{{user.name.title}} {{user.name.first}} {{user.name.last}}</h1>
+            <h2>{{user.location.city}}</h2>
+            <h2>Age {{user.registered.age}}</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum similique nisi culpa nostrum rerum ducimus architecto repellat quasi aliquid neque voluptatum</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
