@@ -15,6 +15,9 @@ interface ApiResponse {
 })
 export class HomePage {
 
+// Variable que almacena el filtro del usuario
+filtro: string = "";
+
  // Almacenamos array obtenido en la API random.me (20 perfiles)
  // indicamos que el tipo de dato es un objeto
  users$: Observable<any[]>;

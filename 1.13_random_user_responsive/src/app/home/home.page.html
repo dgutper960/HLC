@@ -5,28 +5,50 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- El elemento ion-grid nos crea una rejilla -->
+  <!-- Creamos un input para que el usuario pueda poner la condición de filtrado -->
+  <ion-input
+    [(ngModel)]="filtro"
+    placeholder="Filtrar por título, nombre, apellido o edad"
+  >
+  </ion-input>
+
   <ion-grid>
-    <!-- deben especificarse las filas y las columnas -->
     <ion-row>
-      <!-- Para cada columna vamos a recorer los usuarios con un for -->
-      <!-- con size elegimos el tamaño de la pantalla y el número de columnas para cada una -->
-      <ion-col *ngFor="let user of users$ | async" size-xl="2" size-lg="2" size-md="4" size-sm="6" size-xs="12">
-        <!-- Creamos una targeta para cada usuario -->
-        <ion-card>
-          <ion-card-content>
-            <ion-avatar>
-              <!-- Obtenemos la imagen de tamaño mediano -->
-              <img [src]="user.picture.medium" />
-            </ion-avatar>
-            <!-- obtenemos el nombre y el apellido -->
-            <h1>{{user.name.title}} {{user.name.first}} {{user.name.last}}</h1>
-            <h2>{{user.location.city}}</h2>
-            <h2>Age {{user.registered.age}}</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum similique nisi culpa nostrum rerum ducimus architecto repellat quasi aliquid neque voluptatum</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+      <!-- Cambiamos el bucle a este nuevo contenedor -->
+      <ng-container *ngFor="let user of users$ | async">
+        <!-- creamos el 1er filtro con una propiedad que no mostramos pero que funciona (el género) podrñiamos implementar un checkbox -->
+        <!-- Creamos un 2º filfro por nombre que incluya lo que el usuario escriba -->
+        <ion-col
+          *ngIf="filtro===''|| 
+          user.name.first.includes(filtro) || 
+          user.name.last.includes(filtro) || 
+          user.name.title.includes(filtro)"
+          
+          size-xl="2"
+          size-lg="2"
+          size-md="4"
+          size-sm="6"
+          size-xs="12"
+        >
+          <ion-card>
+            <ion-card-content>
+              <ion-avatar>
+                <img [src]="user.picture.medium" />
+              </ion-avatar>
+              <h1>
+                {{user.name.title}} {{user.name.first}} {{user.name.last}}
+              </h1>
+              <h2>{{user.location.city}}</h2>
+              <h2>Age {{user.registered.age}}</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                similique nisi culpa nostrum rerum ducimus architecto repellat
+                quasi aliquid neque voluptatum
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
     </ion-row>
   </ion-grid>
 </ion-content>
