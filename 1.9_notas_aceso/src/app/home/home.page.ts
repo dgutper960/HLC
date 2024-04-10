@@ -47,15 +47,11 @@ export class HomePage implements OnInit {
     // si ambas estan dentro del rango indicado llamamos calculamos la nota final
     if(this.medEspecifica >= 4 && this.medGeneral >= 4){
       this.notaFinal = this.calcNotaFinal(this.medGeneral, this.medEspecifica);
-    }else if(this.medEspecifica < 4){
-      this.mensaje = "La nota media en uno de los bloques es insuficiente";
-    }else if(this.medGeneral < 4){
+    }else if(this.medEspecifica < 4 || this.medGeneral < 4){
       this.mensaje = "La nota media en uno de los bloques es insuficiente";
     }
-
     console.log(this.notaFinal);
     console.log(this.medEspecifica);
     console.log(this.medGeneral);
   }
-
 }
