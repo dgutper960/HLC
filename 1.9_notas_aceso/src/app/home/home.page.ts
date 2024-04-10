@@ -41,12 +41,12 @@ export class HomePage implements OnInit {
   calcularMedias(){
 
     // Calculamos las medias específicas y general
-    this.medGeneral = (this.lengua + this.comentario + this.ingles) / 3;
-    this.medEspecifica = (this.especifica1 + this.especifica2) / 2;
+    this.medGeneral = Number(((this.lengua+this.comentario+this.ingles)/3).toFixed(2));
+    this.medEspecifica = Number(((this.especifica1+this.especifica2)/2).toFixed(2));
 
     // si ambas estan dentro del rango indicado llamamos calculamos la nota final
     if(this.medEspecifica >= 4 && this.medGeneral >= 4){
-      this.notaFinal = this.calcNotaFinal(this.medGeneral, this.medEspecifica);
+      this.notaFinal = Number(this.calcNotaFinal(this.medGeneral, this.medEspecifica).toFixed(2));
     }else if(this.medEspecifica < 4 || this.medGeneral < 4){
       this.mensaje = "La nota media en uno de los bloques es insuficiente";
     }

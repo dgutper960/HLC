@@ -16,13 +16,15 @@
     <ion-row>
       <!-- Cambiamos el bucle a este nuevo contenedor -->
       <ng-container *ngFor="let user of users$ | async">
-        <!-- creamos el 1er filtro con una propiedad que no mostramos pero que funciona (el género) podrñiamos implementar un checkbox -->
-        <!-- Creamos un 2º filfro por nombre que incluya lo que el usuario escriba -->
+        <!-- creamos el 1er filtro con una propiedad que no mostramos pero que funciona (el género) podríamos implementar un checkbox -->
+        <!-- Creamos otros filfros que incluyan lo que el usuario escriba -->
         <ion-col
-          *ngIf="filtro===''|| 
-          user.name.first.includes(filtro) || 
-          user.name.last.includes(filtro) || 
-          user.name.title.includes(filtro)"
+        *ngIf="filtro==='' || 
+        user.name.first.includes(filtro) || 
+        user.name.last.includes(filtro) || 
+        user.name.title.includes(filtro) ||
+        user.registered.age.toString().includes(filtro)"
+ 
           
           size-xl="2"
           size-lg="2"
