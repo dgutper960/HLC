@@ -12,10 +12,18 @@ export class HomePage {
 
   // Podemos declarar propiedades del tipo Tarea 
   tareaEditando: Tarea;
+  // Propieded que almacena los datos retornados por consultar()
+  arrayColleccionTareas: any = [{
+    id: "",
+    data: {} as Tarea
+  }];
 
   constructor(private firestoreService: FirestoreService) {
     // Crea una tarea vacía al empezar
     this.tareaEditando = {} as Tarea;
+
+    // Llamada a obtenerListaTareas() para cargar la lista de tareas nada más empezar
+    this.obtenerListaTareas();
   }
 
   clickBotonInsertar() {
@@ -30,6 +38,19 @@ export class HomePage {
       }, (error) => {
         // en caso de error
         console.error(error)
+      });
+  }
+
+  // Método que obtiene la lista de tareas
+  obtenerListaTareas(){
+    this.firestoreService.consultar("tareas").subscribe((resultadoConsultaTareas)=>{
+      this.arrayColleccionTareas = [];
+      resultadoConsultaTareas.forEach((datosTarea: any)=>{
+        this.arrayColleccionTareas.push({
+          id: datosTarea.payload.doc.id,
+          data: datosTarea.payload.doc.data()
+        })
       })
+    })
   }
 }
